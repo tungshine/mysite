@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from blog import models
 from blog.models import User
 
@@ -17,7 +17,6 @@ def register(request):
         email = request.POST.get("email", None)
 
         user_set = User.objects.filter(username=username)
-        len(user_set)
         if len(user_set) == 0:
             models.User.objects.create(
                 username=username,
@@ -32,3 +31,7 @@ def register(request):
 
 def login(request):
     return None
+
+
+def year_archive(request, year, month):
+    return HttpResponse(year + '年' + month + '月')
