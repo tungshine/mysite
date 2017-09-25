@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="/register" method="post">
+    <p>姓名：<input type="text" name="username"></p>
+    <p>邮箱：<input type="text" name="email"></p>
+    <p><input type="submit" value="submit"></p>
+    {% ifequal code 0 %}
+        <label style="color: #008000;">{{ msg }}</label>
+    {% else %}
+        <label style="color: #ff0000;">{{ msg }}</label>
+    {% endifequal %}
+
+</form>
+<script src="static/jquery.min.js"></script>
+<script>
+    $(function () {
+        alert(1)
+    });
+</script>
+</body>
+</html>
