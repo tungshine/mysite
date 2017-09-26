@@ -5,6 +5,10 @@ from blog.models import User
 
 # Create your views here.
 
+def index(request):
+    user_set = models.User.objects.all()
+    return render(request, 'index.html', {'user_list': user_set})
+
 
 def blog_list(request):
     return render(request, 'blog_list.html', {'books': '111'})

@@ -3,21 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+        {# 去掉浏览器宽度 #} padding: 0;
+
+        }
+
+        ul {
+        {#去掉ul列表的点#} list-style: none;
+
+        }
+
+        .outer {
+            margin: 50px auto;
+            height: 340px;
+            width: 790px;
+        {# 根据父级来绝对定位 #} position: relative;
+        }
+
+        .img li {
+        {# 绝对定位 #} position: absolute;
+            top: 0px;
+            left: 0px;
+            display: none;
+        }
+
+        .img li.active {
+            display: block;
+        }
+
+        .num {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+        {# 不加width: 100% 上面text-aglin属性不生效,因为position为absolute,脱离文档流,不知道宽度是多少,所以不生效#} width: 100%;
+        }
+
+        .num li {
+        {# 将li设置为一行显示 #} display: inline-block;
+            height: 20px;
+            width: 20px;
+            background-color: #d3d3d3;
+            color: #ffffff;
+            text-align: center;
+            line-height: 20px;
+            border-radius: 50%;
+            margin: 0 3px;
+        }
+
+        .btn {
+            display: none;
+            position: absolute;
+            height: 60px;
+            width: 30px;
+            background-color: #d3d3d3;
+            color: #ffffff;
+            text-align: center;
+            line-height: 60px;
+            top: 50%;
+            margin-top: -30px;
+        }
+
+        .left_btn {
+            left: 0px;
+        }
+
+        .right_btn {
+            right: 0px;
+        }
+
+        .img {
+        {#        .img > li > a > img:hover {#} cursor: pointer;
+        }
+
+        {# 是指：当鼠标移到.outer 类上面时,给.btn类加上下面的样式 #}
+        .outer:hover .btn {
+            display: block;
+            cursor: pointer;
+        }
+
+        .current {
+        {# 样式优先级问题,因为父级标签中有一个背景色,并且优先级高于当前 #} background-color: #ff0000 !important;
+        }
+    </style>
 </head>
 <body>
-<table>
-    <tr>
-        <td>姓名</td>
-        <td>邮箱</td>
-    </tr>
-
-    {% for user in user_list %}
-        <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.email }}</td>
-        </tr>
-    {% endfor %}
-
-</table>
+<div class="outer">
+    <ul class="img">
+        <li class="active"><a><img src="/static/img/1.jpg"></a></li>
+        <li><a><img src="/static/img/2.jpg"></a></li>
+        <li><a><img src="/static/img/3.jpg"></a></li>
+        <li><a><img src="/static/img/4.jpg"></a></li>
+        <li><a><img src="/static/img/5.jpg"></a></li>
+        <li><a><img src="/static/img/6.jpg"></a></li>
+    </ul>
+    <ul class="num">
+        <li class="current">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+    <div class="btn left_btn"> <</div>
+    <div class="btn right_btn"> ></div>
+</div>
 </body>
+<script src="/static/jquery.min.js"></script>
 </html>
+<script>
+    $('.num li').mouseover(function () {
+        {# 将鼠标移动在数字上面时,背景颜色变红,其他数字不变红 #}
+        $(this).addClass('current').siblings().removeClass('current');
+        {# 获取当前数字索引 #}
+        var index = $(this).index();
+        {# 根据数字索引找到对应的图片 #}
+
+        {# 设置对象的显示与隐藏 #}
+        {#        $('.img li').eq(index).show().siblings().hide()#}
+        {# 动画：渐隐渐现 #}
+        $('.img li').eq(index).fadeIn(1000).siblings().fadeOut(1000)
+
+    });
+    var i = 1;
+
+    function move() {
+        $('.num li').eq(i).addClass('current').siblings().removeClass('current');
+{#        $('.img li').eq(i).fadeIn(1000).siblings().fadeOut(1000)#}
+        $('.img li').eq(i).show().siblings().hide()
+        i++;
+        if (i == 6) {
+            i = 0;
+        }
+    }
+
+    var time = setInterval(move, 1000);
+</script>
