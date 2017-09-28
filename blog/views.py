@@ -6,8 +6,7 @@ from blog.models import User
 # Create your views here.
 
 def index(request):
-    user_set = models.User.objects.all()
-    return render(request, 'index.html', {'user_list': user_set})
+    return render(request, 'index.html')
 
 
 def blog_list(request):
@@ -39,3 +38,8 @@ def login(request):
 
 def year_archive(request, year, month):
     return HttpResponse(year + '年' + month + '月')
+
+
+def user_list(request):
+    query_set = models.User.objects.all()
+    return render(request, 'user/user-list.html', {'user_list': query_set})

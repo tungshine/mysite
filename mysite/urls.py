@@ -25,5 +25,6 @@ urlpatterns = {
     url(r'^admin/', admin.site.urls),
     url(r'^blog/', include('blog.urls')),
     url(r'^index', views.index),
+    url(r'^users/$', views.user_list),
 
 }

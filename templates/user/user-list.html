@@ -9,12 +9,21 @@
     <tr>
         <td>姓名</td>
         <td>邮箱</td>
+        <td>索引</td>
+        <td>大小写</td>
     </tr>
 
     {% for user in user_list %}
         <tr>
+            {# 从1开始的索引#}
+            <td>{{ forloop.counter }}</td>
+            {# 从0开始的索引#}
+            {#            <td>{{ forloop.counter0 }}</td>#}
+            {# 倒序索引#}
+            {#            <td>{{ forloop.revcounter }}</td>#}
             <td>{{ user.username }}</td>
             <td>{{ user.email }}</td>
+            <td>{{ user.email | upper }}</td>
         </tr>
     {% endfor %}
 
