@@ -43,3 +43,7 @@ def year_archive(request, year, month):
 def user_list(request):
     query_set = models.User.objects.all()
     return render(request, 'user/user-list.html', {'user_list': query_set})
+
+def user_delete(request):
+    models.User.delete()
+    return render(request, 'user/user-list.html',)
